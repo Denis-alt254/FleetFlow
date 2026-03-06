@@ -5,7 +5,7 @@ const DriverSchema = new mongoose.Schema({
     phone: String,
     licenseNumber: String,
     assignedTruck: {type: mongoose.Schema.Types.ObjectId, ref: 'Truck'},
-    status: 'ACTIVE' | 'INACTIVE' 
+    status: {type: String, enum:['ACTIVE' | 'INACTIVE'], default: 'ACTIVE'} 
 }, {timestamps: true});
 
 module.exports = mongoose.model('Driver', DriverSchema);

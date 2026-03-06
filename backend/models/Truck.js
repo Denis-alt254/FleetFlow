@@ -4,7 +4,7 @@ const TruckSchema = new mongoose.Schema({
     plateNumber: String,
     model: String,
     capacityTons: Number,
-    status: 'ACTIVE' | 'MAINTENANCE' | 'INACTIVE',
+    status: {type: String, enum:['ACTIVE' | 'MAINTENANCE' | 'INACTIVE'], default: 'ACTIVE'},
     assignedDriver: {type: mongoose.Schema.Types.ObjectId, ref: 'Driver'}
 }, {timestamps: true});
 
