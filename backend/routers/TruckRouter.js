@@ -3,6 +3,6 @@ const { CreateTruck, EditTruck } = require('../controllers/TruckController')
 const router = express.Router()
 
 router.post('/create', CreateTruck)
-router.put('/edit', EditTruck)
+router.put('/edit/:id', EditTruck)
 
 module.exports = router
