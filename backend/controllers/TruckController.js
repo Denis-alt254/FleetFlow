@@ -23,17 +23,21 @@ const CreateTruck = async(req, res) => {
 
 const EditTruck = async(req, res) => {
     try {
-        const truckId = req.params._id;
+        const truckId = req.params.id;
 
         const {plateNumber, model, capacityTons, status, assignedDriver} = req.body;
 
         //find truck
         const truck = await Truck.findById(truckId);
 
+        if(!truck){
+            return res.status(404).json({error: "Truck not found"});
+        }
+
         fieldsToEdit = ["plateNumber", "model", "capacityTons", "status", "assignedDriver"];
 
-        fieldsToEdit.array.forEach(field => {
-            if(req.body[field]){
+        fieldsToEdit.forEach(field => {
+            if(req.body[field] !== undefined){
                 truck[field] = req.body[field]
             }
         });
@@ -41,7 +45,7 @@ const EditTruck = async(req, res) => {
         const editedTruck = await truck.save();
         res.status(200).json({message: "Edited successfully", 'truckId': editedTruck._id })
     } catch (error) {
-        console.error({"Error editing truck: ": error.message})
+        console.error({"Error editing truck": error.message})
         res.status(500).json("Internal server error.")
     }
 }
