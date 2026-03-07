@@ -46,4 +46,4 @@ const EditTruck = async(req, res) => {
     }
 }
 
-module.exports = {CreateTruck}
+module.exports = {CreateTruck, EditTruck}
