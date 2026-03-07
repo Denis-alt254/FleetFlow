@@ -5,7 +5,7 @@ const AddDriver = async(req, res) => {
         const {name, phone, licenseNumber, assignedTruck, status} = req.body;
         const driverExist = await Driver.findOne({name});
 
-        if(driverExit){
+        if(driverExist){
             return res.status(409).json({error: "Truck already exist."});
         }
 
