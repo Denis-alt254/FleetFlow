@@ -1,9 +1,14 @@
-FROM node:latest
+FROM node:18-alpine
 
-COPY package.json /F-backend/
+WORKDIR /app/
 
-COPY backend /F-backend/
+COPY package*.json ./
 
 RUN npm install 
+RUN npm install mongoose express dotenv cors
 
-CMD [ "node" "server.js" ]
+COPY . .
+
+EXPOSE 5000
+
+CMD [ "node", "server.js" ]
